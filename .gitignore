@@ -1,0 +1,8 @@
+build/
+.qtcreator/
+CMakeLists.txt.user
+*.user
+.vscode/
+.idea/
+sdk/lib/
+sdk/include/
