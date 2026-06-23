@@ -7,7 +7,7 @@
 struct vtp_output_data {
     obs_output_t* output = nullptr;
     vtp_sender_t* sender = nullptr;
-    std::string stream_name = "OBS-VTP-Output";
+    std::string stream_name = "vtp-network-video-output";
     std::atomic<bool> active{false};
 };
 
@@ -70,7 +70,7 @@ static bool vtp_output_start(void* priv_data) {
     // Initialize VTP sender
     data->sender = vtp_create_sender(data->stream_name.c_str(), width, height, fps, false, true);
     if (!data->sender || !vtp_sender_start(data->sender)) {
-        std::cerr << "[OBS VTP Output] Failed to start VTP Sender" << std::endl;
+        std::cerr << "[vtp-network-video Output] Failed to start VTP Sender" << std::endl;
         if (data->sender) {
             vtp_destroy_sender(data->sender);
             data->sender = nullptr;
@@ -92,7 +92,7 @@ static bool vtp_output_start(void* priv_data) {
         return false;
     }
 
-    std::cout << "[OBS VTP Output] Streaming started on port: " << vtp_sender_get_port(data->sender) << std::endl;
+    std::cout << "[vtp-network-video Output] Streaming started on port: " << vtp_sender_get_port(data->sender) << std::endl;
     return true;
 }
 
@@ -104,7 +104,7 @@ static void vtp_output_stop(void* priv_data, uint64_t) {
         vtp_destroy_sender(data->sender);
         data->sender = nullptr;
         data->active = false;
-        std::cout << "[OBS VTP Output] Streaming stopped" << std::endl;
+        std::cout << "[vtp-network-video Output] Streaming stopped" << std::endl;
     }
 }
 
@@ -125,7 +125,7 @@ static void vtp_output_raw_audio(void* priv_data, struct audio_data* audio) {
 }
 
 static void vtp_output_defaults(obs_data_t* settings) {
-    obs_data_set_default_string(settings, "stream_name", "OBS-VTP-Output");
+    obs_data_set_default_string(settings, "stream_name", "vtp-network-video-output");
 }
 
 struct obs_output_info vtp_output_info = {

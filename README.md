@@ -55,7 +55,7 @@ make install
 ### A. Receiving Video/Audio (VTP Input)
 1. In OBS, click **`+`** under the **Sources** dock.
 2. Select **VTP Client Source**.
-3. Toggle **Use Auto-Discovery** to automatically discover the source by name (e.g., `Studio-Cam-01`), or enter the static **Server IP** and **Port** manually.
+3. Toggle **Use Auto-Discovery** to automatically discover the source by name (e.g., `VTP-Camera-1`), or enter the static **Server IP** and **Port** manually.
 
 ### B. Streaming OBS Output (VTP Output)
 1. Go to the top menu in OBS: **Tools** -> **VTP Output (Start/Stop)**.
