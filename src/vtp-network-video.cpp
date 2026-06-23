@@ -4,7 +4,7 @@
 #include "vtp-output.h"
 
 OBS_DECLARE_MODULE()
-OBS_MODULE_USE_DEFAULT_LOCALE("obs-vtp", "en-US")
+OBS_MODULE_USE_DEFAULT_LOCALE("vtp-network-video", "en-US")
 
 MODULE_EXPORT const char* obs_module_description(void) {
     return "Video Transmission Protocol (VTP) integration for OBS Studio";

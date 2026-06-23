@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(obs-vtp VERSION 1.0.0 LANGUAGES CXX)
+project(vtp-network-video VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -19,13 +19,13 @@ if(NOT EXISTS "${VTP_LIBRARY}")
 endif()
 
 # Plugin target
-add_library(obs-vtp MODULE
-    src/obs-vtp.cpp
+add_library(vtp-network-video MODULE
+    src/vtp-network-video.cpp
     src/vtp-source.cpp
     src/vtp-output.cpp
 )
 
-target_include_directories(obs-vtp PRIVATE
+target_include_directories(vtp-network-video PRIVATE
     src
     ${LIBOBS_INCLUDE_DIRS}
     ${LIBOBS_INCLUDE_DIRS}/obs
@@ -33,19 +33,27 @@ target_include_directories(obs-vtp PRIVATE
     ${VTP_INCLUDE_DIR}
 )
 
-target_link_libraries(obs-vtp PRIVATE
+target_link_libraries(vtp-network-video PRIVATE
     ${LIBOBS_LIBRARIES}
     ${OBS_FRONTEND_LIBRARIES}
     ${VTP_LIBRARY}
 )
 
 # Output naming convention for OBS plugins on Linux and RPATH setup
-set_target_properties(obs-vtp PROPERTIES
+set_target_properties(vtp-network-video PROPERTIES
     PREFIX ""
-    OUTPUT_NAME "obs-vtp"
+    OUTPUT_NAME "vtp-network-video"
     INSTALL_RPATH "$ORIGIN"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/vtp-network-video/bin/64bit"
+)
+
+# Copy libvtp.so dependency directly to build/vtp-network-video/bin/64bit after build
+add_custom_command(TARGET vtp-network-video POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_BINARY_DIR}/vtp-network-video/bin/64bit"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different "${VTP_LIBRARY}" "${CMAKE_BINARY_DIR}/vtp-network-video/bin/64bit/"
+    COMMENT "Copying libvtp.so to build output directory..."
 )
 
 # Installation instruction (standard OBS plugin path on Linux)
-install(TARGETS obs-vtp DESTINATION ~/.config/obs-studio/plugins/obs-vtp/bin/64bit)
-install(FILES "${VTP_LIBRARY}" DESTINATION ~/.config/obs-studio/plugins/obs-vtp/bin/64bit)
+install(TARGETS vtp-network-video DESTINATION ~/.config/obs-studio/plugins/vtp-network-video/bin/64bit)
+install(FILES "${VTP_LIBRARY}" DESTINATION ~/.config/obs-studio/plugins/vtp-network-video/bin/64bit)

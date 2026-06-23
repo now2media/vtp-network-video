@@ -1,6 +1,6 @@
-# obs-vtp (OBS Studio VTP Integration Plugin)
+# vtp-network-video (OBS Studio VTP Integration Plugin)
 
-**obs-vtp** is a high-performance, open-source plugin for OBS Studio that enables bidirectional real-time video and audio transmission over local networks using the **VTP (Video Transmission Protocol)**. 
+**vtp-network-video** is a high-performance, open-source plugin for OBS Studio that enables bidirectional real-time video and audio transmission over local networks using the **VTP (Video Transmission Protocol)**. 
 
 With VTP's highly optimized SIMD compression and zero-overhead transport pipeline, you can stream media between multiple OBS instances and external broadcast equipment with **sub-10ms latency**.
 
@@ -25,7 +25,7 @@ sudo apt update
 sudo apt install -y cmake build-essential pkg-config libobs-dev libturbojpeg-dev
 ```
 
-*Note for End Users: If you are distributing the compiled binary (`obs-vtp.so`), users only need `libturbojpeg0` installed:*
+*Note for End Users: If you are distributing the compiled binary (`vtp-network-video.so`), users only need `libturbojpeg0` installed:*
 ```bash
 sudo apt install libturbojpeg0
 ```
@@ -46,7 +46,7 @@ cmake -DCMAKE_BUILD_TYPE=Release ..
 make
 make install
 ```
-*This installs the plugin directly into your local OBS plugins directory (`~/.config/obs-studio/plugins/obs-vtp/bin/64bit/`).*
+*This installs the plugin directly into your local OBS plugins directory (`~/.config/obs-studio/plugins/vtp-network-video/bin/64bit/`).*
 
 ---
 
