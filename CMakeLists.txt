@@ -15,7 +15,7 @@ set(VTP_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/sdk/include")
 set(VTP_LIBRARY "${CMAKE_CURRENT_SOURCE_DIR}/sdk/lib/libvtp.so")
 
 if(NOT EXISTS "${VTP_LIBRARY}")
-    message(WARNING "VTP Library not found at ${VTP_LIBRARY}. Please copy libvtp.so and vtp.h into the 'sdk' directory before building.")
+    message(WARNING "VTP Library not found at ${VTP_LIBRARY}.")
 endif()
 
 # Plugin target
@@ -51,7 +51,7 @@ set_target_properties(vtp-network-video PROPERTIES
 add_custom_command(TARGET vtp-network-video POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_BINARY_DIR}/vtp-network-video/bin/64bit"
     COMMAND ${CMAKE_COMMAND} -E copy_if_different "${VTP_LIBRARY}" "${CMAKE_BINARY_DIR}/vtp-network-video/bin/64bit/"
-    COMMENT "Copying libvtp.so to build output directory..."
+    COMMENT "Copying libvtp.so"
 )
 
 # Installation instruction (standard OBS plugin path on Linux)
